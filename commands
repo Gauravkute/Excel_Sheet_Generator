@@ -1,0 +1,9 @@
+#To make virtual environment
+python -m venv excel_env
+#To start virtual environment
+excel_env\Scripts\activate
+#To deactivate virtual envrionment
+deactivate
+
+#To run 
+streamlit run app.py
