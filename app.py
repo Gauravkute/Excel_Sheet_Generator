@@ -6,7 +6,7 @@ import string
 from datetime import datetime,timedelta
 
 
-st.title("Excel Sheet Generator")
+st.title("Data generator")
 
 num_rows = st.number_input("Enter the number of rows",
                            min_value=1,
@@ -17,6 +17,13 @@ num_cols = st.number_input("Enter the number of columns",
                            min_value=1,
                            max_value=20,
                            value=3)
+
+file_name = st.text_input("Enter File Name", "generated_file")
+
+file_format = st.selectbox(
+    "Select File Format",
+    ["xlsx","csv"]
+)
 
 columns = []
 data_type = []
@@ -62,7 +69,7 @@ def generate_data(dtype,rows):
             for _ in range (rows)
         ]
 
-if st.button("Generate Excel Sheet"):
+if st.button("Generate Data"):
     data = {}
 
     for col_name,dtype in zip(columns,data_type):
@@ -71,13 +78,17 @@ if st.button("Generate Excel Sheet"):
     df = pd.DataFrame(data)
     st.dataframe(df)
 
-    file_name = "generated_excel_sheet.xlsx"
-    df.to_excel(file_name,index=False)
+    full_file_name = f"{file_name}.{file_format}"
 
-    with open(file_name,"rb") as file:
+    if file_format == "xlsx":
+        df.to_excel(full_file_name,index=False)
+    elif file_format == "csv":
+        df.to_csv(full_file_name,index=False)
+
+    with open(full_file_name,"rb") as file:
         st.download_button(
-            label="Download Excel sheet file",
+            label="Download data file",
             data=file,
-            file_name=file_name
-
+            file_name=full_file_name,
+            mime="application/octet-stream"
         )
