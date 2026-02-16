@@ -1,3 +1,30 @@
-excel_env/
+# Python cache files
 __pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+excel_env/
+venv/
+env/
+
+# Streamlit config (local)
+.streamlit/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Generated files (optional)
 *.xlsx
+*.csv
+
+# VS Code settings
+.vscode/
+
+# Logs
+*.log
